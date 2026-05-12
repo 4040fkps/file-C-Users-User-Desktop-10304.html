@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麥塊終極百科 - 修正版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f3f4f6; font-family: "Microsoft JhengHei", sans-serif; overflow-x: hidden; }
+        .minecraft-bg { background-color: #8B5E3C; background-image: linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+        .msg-anim { animation: popIn 0.3s ease-out forwards; }
+        @keyframes popIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="max-w-md mx-auto bg-white min-h-screen shadow-2xl relative flex flex-col">
+
+    <div id="main-page" class="flex-1 overflow-y-auto pb-20">
+        <div class="minecraft-bg p-8 text-center text-white border-b-4 border-black/20">
+            <h1 class="text-4xl font-black tracking-wider mb-2" style="-webkit-text-stroke: 1px black;">麥塊教科書</h1>
+            <p class="text-xl font-bold text-yellow-400">什麼都能問版</p>
+        </div>
+
+        <div class="p-4 grid grid-cols-2 gap-4">
+            <div onclick="openChat('生物圖鑑', '#72C491', '🧟')" class="bg-[#72C491] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
+                <span class="text-lg z-10">生物圖鑑</span>
+                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">🧟</span>
+            </div>
+            <div onclick="openChat('礦石材料', '#F4AB43', '💎')" class="bg-[#F4AB43] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
+                <span class="text-lg z-10">礦石材料</span>
+                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">💎</span>
+            </div>
+            <div onclick="openChat('紅石機械', '#DD4B39', '🔴')" class="bg-[#DD4B39] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
+                <span class="text-lg z-10">紅石機械</span>
+                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">🔴</span>
+            </div>
+            <div onclick="openChat('工具裝備', '#6184D8', '⚔️')" class="bg-[#6184D8] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
+                <span class="text-lg z-10">工具裝備</span>
+                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">⚔️</span>
+            </div>
+        </div>
+        <div class="p-4 text-center text-gray-400 text-sm">點擊上方卡片或直接點下方工具欄開始聊天</div>
+    </div>
+
+    <div id="chat-page" class="hidden fixed inset-0 bg-white z-50 flex flex-col">
+        <div id="chat-header" class="p-4 text-white font-bold flex items-center justify-between shadow-md bg-blue-600">
+            <div class="flex items-center gap-3">
+                <button onclick="closeChat()" class="text-2xl">←</button>
+                <span id="chat-title">AI 導師</span>
+            </div>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50"></div>
+        <div class="p-4 border-t flex gap-2 bg-white">
+            <input type="text" id="user-input" placeholder="試試問：殭屍、鑽石、紅石..." class="flex-1 bg-gray-100 rounded-xl px-4 py-3 outline-none">
+            <button id="send-btn" class="bg-blue-600 text-white px-6 rounded-xl font-bold">發送</button>
+        </div>
+    </div>
+
+    <script>
+        // 強化的資料庫，確保包含所有關鍵字
+        const mcData = [
+            { tags: ["殭屍", "僵屍", "zombie"], info: "<b>敵對生物：</b>殭屍、骷髏、苦力怕、蜘蛛、洞穴蜘蛛、浮游靈（幽靈）、史萊姆、烈焰使者、凋零骷髏、掠奪者、惱鬼。殭屍在陽光下會燃燒！" },
+            { tags: ["草", "泥土", "石頭", "方塊", "自然"], info: "<b>自然生成方塊：</b>泥土、草方塊、石頭、深層石、沙子、礫石、黏土、雪、冰、黑曜石、安山岩、閃長岩、花崗岩。" },
+            { tags: ["木", "橡木", "杉木", "樺木", "櫻花"], info: "<b>木頭與植物：</b>橡木、杉木、樺木、叢林木、相思木、黑橡木、紅樹林木、櫻花木。" },
+            { tags: ["鑽石", "鐵", "金", "礦", "煤"], info: "<b>礦石與材料：</b>煤炭、鐵、金、紅石、青金石、鑽石、銅、翡翠（綠寶石）、下界合金。" },
+            { tags: ["苦力怕", "creeper", "自爆"], info: "<b>敵對生物：</b>苦力怕接近玩家會自爆。掉落物：火藥。" },
+            { tags: ["小黑", "末影人", "enderman"], info: "<b>中立生物：</b>末影人。別看他的眼睛，他怕水。" },
+            { tags: ["鎬", "斧", "鏟", "劍", "防具", "護甲"], info: "<b>工具與護甲：</b>依材質分為木、石、鐵、金、鑽石、下界合金。包含鎬、斧、鍬、鋤、劍、弓、盾牌、盔甲。" },
+            { tags: ["紅石", "活塞", "中繼器", "比較器"], info: "<b>紅石機械：</b>紅石粉、中繼器、比較器、觀察者、活塞、發射器、音符盒、TNT。" },
+            { tags: ["藥水", "治療", "隱身", "附魔"], info: "<b>藥水與附魔：</b>治療藥水、迅捷、力量、隱身藥水。附魔包含：耐久、修補、鋒利、絲路、幸運。" },
+            { tags: ["龍", "末影龍", "凋零", "boss"], info: "<b>BOSS：</b>終界龍（End Dragon）、凋零怪（Wither）。" }
+        ];
+
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        function openChat(title, color, icon) {
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('chat-page').classList.remove('hidden');
+            document.getElementById('chat-title').innerText = title;
+            document.getElementById('chat-header').style.backgroundColor = color;
+            chatMessages.innerHTML = '';
+            appendMsg('bot', `我是麥塊導師！你想知道關於「${title}」的什麼呢？`);
+        }
+
+        function closeChat() {
+            document.getElementById('chat-page').classList.add('hidden');
+            document.getElementById('main-page').classList.remove('hidden');
+        }
+
+        function appendMsg(sender, text) {
+            const wrap = document.createElement('div');
+            wrap.className = sender === 'user' ? 'flex justify-end msg-anim' : 'flex justify-start msg-anim';
+            const div = document.createElement('div');
+            div.className = sender === 'user' ? 'bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%]' : 'bg-white border p-3 rounded-2xl rounded-tl-none max-w-[85%]';
+            div.innerHTML = text;
+            wrap.appendChild(div);
+            chatMessages.appendChild(wrap);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleSend() {
+            const q = userInput.value.trim().toLowerCase();
+            if (!q) return;
+            appendMsg('user', q);
+            userInput.value = '';
+
+            setTimeout(() => {
+                let found = false;
+                // 這裡改用 tags 陣列進行模糊匹配，只要你的話裡面提到關鍵字就中
+                for (let item of mcData) {
+                    if (item.tags.some(tag => q.includes(tag))) {
+                        appendMsg('bot', `🤖 <b>AI 解析：</b><br>${item.info}`);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    appendMsg('bot', `🤖 <b>AI 解析：</b><br>抱歉，關於「${q}」我還沒讀到那幾頁。試試問：<b>殭屍、鑽石、紅石、藥水</b>。`);
+                }
+            }, 300);
+        }
+
+        document.getElementById('send-btn').addEventListener('click', handleSend);
+        userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+    </script>
+</body>
+</html>
