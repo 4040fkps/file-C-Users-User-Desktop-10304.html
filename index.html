@@ -3,71 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>麥塊終極百科 - 修正版</title>
+    <title>麥塊教科書 - 最終智慧版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #f3f4f6; font-family: "Microsoft JhengHei", sans-serif; overflow-x: hidden; }
         .minecraft-bg { background-color: #8B5E3C; background-image: linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 20px 20px; }
-        .msg-anim { animation: popIn 0.3s ease-out forwards; }
+        .card-shadow { box-shadow: 0 4px 0px rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s; }
+        .card-shadow:active { transform: translateY(2px); box-shadow: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
         @keyframes popIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .msg-anim { animation: popIn 0.3s ease-out forwards; }
     </style>
 </head>
 <body class="max-w-md mx-auto bg-white min-h-screen shadow-2xl relative flex flex-col">
 
     <div id="main-page" class="flex-1 overflow-y-auto pb-20">
         <div class="minecraft-bg p-8 text-center text-white border-b-4 border-black/20">
-            <h1 class="text-4xl font-black tracking-wider mb-2" style="-webkit-text-stroke: 1px black;">麥塊教科書</h1>
-            <p class="text-xl font-bold text-yellow-400">什麼都能問版</p>
+            <h1 class="text-4xl font-black tracking-wider drop-shadow-lg mb-2" style="-webkit-text-stroke: 1px black;">麥塊教科書</h1>
+            <p class="text-xl font-bold text-yellow-400">📊 最終智慧全功能資料庫 📊</p>
         </div>
 
         <div class="p-4 grid grid-cols-2 gap-4">
-            <div onclick="openChat('生物圖鑑', '#72C491', '🧟')" class="bg-[#72C491] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
-                <span class="text-lg z-10">生物圖鑑</span>
-                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">🧟</span>
+            <div onclick="openChat('自然與建築', '#78B159', '🏠')" class="bg-[#78B159] p-4 rounded-2xl text-white font-bold h-28 relative card-shadow flex flex-col justify-between overflow-hidden">
+                <span class="text-lg z-10">自然與建築</span>
+                <span class="absolute right-[-10px] bottom-0 text-5xl opacity-40">🏠</span>
             </div>
-            <div onclick="openChat('礦石材料', '#F4AB43', '💎')" class="bg-[#F4AB43] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
-                <span class="text-lg z-10">礦石材料</span>
-                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">💎</span>
+            <div onclick="openChat('礦石與材料', '#F4AB43', '💎')" class="bg-[#F4AB43] p-4 rounded-2xl text-white font-bold h-28 relative card-shadow flex flex-col justify-between overflow-hidden">
+                <span class="text-lg z-10">礦石與材料</span>
+                <span class="absolute right-[-10px] bottom-0 text-5xl opacity-40">💎</span>
             </div>
-            <div onclick="openChat('紅石機械', '#DD4B39', '🔴')" class="bg-[#DD4B39] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
-                <span class="text-lg z-10">紅石機械</span>
-                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">🔴</span>
+            <div onclick="openChat('生物與戰鬥', '#72C491', '⚔️')" class="bg-[#72C491] p-4 rounded-2xl text-white font-bold h-28 relative card-shadow flex flex-col justify-between overflow-hidden">
+                <span class="text-lg z-10">生物與戰鬥</span>
+                <span class="absolute right-[-10px] bottom-0 text-5xl opacity-40">⚔️</span>
             </div>
-            <div onclick="openChat('工具裝備', '#6184D8', '⚔️')" class="bg-[#6184D8] p-4 rounded-2xl text-white font-bold h-32 relative shadow flex flex-col justify-between overflow-hidden cursor-pointer">
-                <span class="text-lg z-10">工具裝備</span>
-                <span class="absolute right-[-10px] bottom-0 text-6xl opacity-40">⚔️</span>
+            <div onclick="openChat('紅石與釀造', '#DD4B39', '🔴')" class="bg-[#DD4B39] p-4 rounded-2xl text-white font-bold h-28 relative card-shadow flex flex-col justify-between overflow-hidden">
+                <span class="text-lg z-10">紅石與釀造</span>
+                <span class="absolute right-[-10px] bottom-0 text-5xl opacity-40">🔴</span>
             </div>
         </div>
-        <div class="p-4 text-center text-gray-400 text-sm">點擊上方卡片或直接點下方工具欄開始聊天</div>
+
+        <div class="px-4 py-2">
+            <h2 class="text-lg font-bold mb-3">🔥 終極百科快速索引</h2>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs text-gray-700">
+                <span class="bg-gray-100 p-2 rounded-lg border">#可疑的沙子</span>
+                <span class="bg-gray-100 p-2 rounded-lg border">#下界合金</span>
+                <span class="bg-gray-100 p-2 rounded-lg border">#重錘 Mace</span>
+                <span class="bg-gray-100 p-2 rounded-lg border">#觀察者</span>
+                <span class="bg-gray-100 p-2 rounded-lg border">#界伏盒</span>
+                <span class="bg-gray-100 p-2 rounded-lg border">#不老圖騰</span>
+            </div>
+        </div>
+
+        <nav class="fixed bottom-0 max-w-md w-full bg-white border-t flex justify-around py-3 z-10">
+            <div class="text-orange-600 flex flex-col items-center cursor-pointer"><span>🏠</span><span class="text-xs">首頁</span></div>
+            <div onclick="openChat('全知問答', '#2563EB', '🤖')" class="text-gray-400 flex flex-col items-center cursor-pointer"><span>💬</span><span class="text-xs">AI問答</span></div>
+        </nav>
     </div>
 
     <div id="chat-page" class="hidden fixed inset-0 bg-white z-50 flex flex-col">
-        <div id="chat-header" class="p-4 text-white font-bold flex items-center justify-between shadow-md bg-blue-600">
+        <div id="chat-header" class="p-4 text-white font-bold flex items-center justify-between shadow-md">
             <div class="flex items-center gap-3">
                 <button onclick="closeChat()" class="text-2xl">←</button>
                 <span id="chat-title">AI 導師</span>
             </div>
+            <span id="chat-icon" class="text-2xl"></span>
         </div>
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50"></div>
         <div class="p-4 border-t flex gap-2 bg-white">
-            <input type="text" id="user-input" placeholder="試試問：殭屍、鑽石、紅石..." class="flex-1 bg-gray-100 rounded-xl px-4 py-3 outline-none">
-            <button id="send-btn" class="bg-blue-600 text-white px-6 rounded-xl font-bold">發送</button>
+            <input type="text" id="user-input" placeholder="問任何東西（例如：殭屍、重錘、藥水流程）..." class="flex-1 bg-gray-100 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="send-btn" class="bg-blue-600 text-white px-5 rounded-xl font-bold active:scale-95 transition">發送</button>
         </div>
     </div>
 
     <script>
-        // 強化的資料庫，確保包含所有關鍵字
-        const mcData = [
-            { tags: ["殭屍", "僵屍", "zombie"], info: "<b>敵對生物：</b>殭屍、骷髏、苦力怕、蜘蛛、洞穴蜘蛛、浮游靈（幽靈）、史萊姆、烈焰使者、凋零骷髏、掠奪者、惱鬼。殭屍在陽光下會燃燒！" },
-            { tags: ["草", "泥土", "石頭", "方塊", "自然"], info: "<b>自然生成方塊：</b>泥土、草方塊、石頭、深層石、沙子、礫石、黏土、雪、冰、黑曜石、安山岩、閃長岩、花崗岩。" },
-            { tags: ["木", "橡木", "杉木", "樺木", "櫻花"], info: "<b>木頭與植物：</b>橡木、杉木、樺木、叢林木、相思木、黑橡木、紅樹林木、櫻花木。" },
-            { tags: ["鑽石", "鐵", "金", "礦", "煤"], info: "<b>礦石與材料：</b>煤炭、鐵、金、紅石、青金石、鑽石、銅、翡翠（綠寶石）、下界合金。" },
-            { tags: ["苦力怕", "creeper", "自爆"], info: "<b>敵對生物：</b>苦力怕接近玩家會自爆。掉落物：火藥。" },
-            { tags: ["小黑", "末影人", "enderman"], info: "<b>中立生物：</b>末影人。別看他的眼睛，他怕水。" },
-            { tags: ["鎬", "斧", "鏟", "劍", "防具", "護甲"], info: "<b>工具與護甲：</b>依材質分為木、石、鐵、金、鑽石、下界合金。包含鎬、斧、鍬、鋤、劍、弓、盾牌、盔甲。" },
-            { tags: ["紅石", "活塞", "中繼器", "比較器"], info: "<b>紅石機械：</b>紅石粉、中繼器、比較器、觀察者、活塞、發射器、音符盒、TNT。" },
-            { tags: ["藥水", "治療", "隱身", "附魔"], info: "<b>藥水與附魔：</b>治療藥水、迅捷、力量、隱身藥水。附魔包含：耐久、修補、鋒利、絲路、幸運。" },
-            { tags: ["龍", "末影龍", "凋零", "boss"], info: "<b>BOSS：</b>終界龍（End Dragon）、凋零怪（Wither）。" }
+        // 全量結構化智慧知識庫
+        const mcDatabase = [
+            {
+                category: "自然與建築方塊類",
+                title: "泥土與地表",
+                keywords: ["泥土", "草方塊", "粗泥", "發根泥土", "耕地", "草徑", "苔蘚", "黏土", "沙子", "紅沙", "礫石", "可疑的沙", "泥巴"],
+                content: "● <b>農業基底：</b>耕地用於種植作物；泥巴可合成為泥磚。<br>● <b>景觀裝飾：</b>草徑與苔蘚用於造景；黏土可燒製成磚塊。<br>● <b>考古機制：</b>使用刷子刷『可疑的沙子/礫石』可獲得陶片、嗅探獸蛋等珍貴物品。"
+            },
+            {
+                category: "自然與建築方塊類",
+                title: "岩石與地底",
+                keywords: ["石頭", "鵝卵石", "深層石", "圓石", "安山岩", "閃長岩", "花崗岩", "凝灰岩", "方解石", "黑曜石", "哭泣的黑曜石", "基岩"],
+                content: "● <b>工具必需：</b>石頭類是前期製作石器、熔爐的必需品，抗炸度良好。<br>● <b>特殊方塊：</b>黑曜石用於做傳送門與附魔台；哭泣的黑曜石做『重生錨』（下界重生點）；基岩為世界邊界無法破壞。"
+            },
+            {
+                category: "自然與建築方塊類",
+                title: "地獄（下界）與終界方塊",
+                keywords: ["下界岩", "獄髓石", "靈魂沙", "靈魂土", "岩漿塊", "螢石", "黑石", "玄武岩", "終界石", "終界石磚"],
+                content: "● <b>下界資源：</b>下界岩可永久點火；靈魂沙/土可燃燒產生藍色『魂之火』；岩漿塊踩踏受傷可用於怪物陷阱；螢石提供高亮度。<br>● <b>終界防禦：</b>終界石具有極高抗炸強度，常作為後期基地防禦外牆。"
+            },
+            {
+                category: "自然與建築方塊類",
+                title: "樹木與木材",
+                keywords: ["木頭", "木材", "橡木", "杉木", "樺木", "叢林木", "相思木", "黑橡木", "紅樹林", "櫻花木", "竹子", "緋紅", "扭曲", "木板", "原木"],
+                content: "● <b>生存核心：</b>萬用材料，用來合成工作檯、木棒、箱子、工具。<br>● <b>美學防備：</b>櫻花木呈粉色；地獄木材（緋紅/扭曲菌莖）具有防燃抗火特性。<br>● <b>紅石控制：</b>木質壓力板與按鈕可被箭矢觸發。"
+            },
+            {
+                category: "自然與建築方塊類",
+                title: "冰雪與水體（高速運輸）",
+                keywords: ["雪塊", "頂層雪", "冰", "緊冰", "藍冰", "浮冰", "冰道"],
+                content: "● <b>冰道高鐵：</b>冰系列方塊極其光滑，在上面放置船隻可以達到極高移動速度，其中以『藍冰』速度最快，為高速物流核心材料。"
+            },
+            {
+                category: "礦石、晶體與原材料",
+                title: "核心礦物大全",
+                keywords: ["煤炭", "鐵", "銅", "金", "紅石", "青金石", "鑽石", "翡翠", "綠寶石", "下界石英", "古老殘骸", "下界合金", "紫水晶"],
+                content: "● <b>煤炭/鐵：</b>基礎燃料；鐵為中期核心，做工具、防具、漏斗、鐵砧。<br>● <b>金/下界合金：</b>金可做動力軌道、金蘋果；古老殘骸可精煉成下界合金錠，打造最強抗火防具。<br>● <b>青金石/鑽石：</b>附魔必備消耗品；鑽石製作頂級裝備。<br>● <b>綠寶石/紅石：</b>村民交易貨幣；紅石為自動化電路核心。"
+            },
+            {
+                category: "生物與敵對怪物",
+                title: "生物圖鑑（被動、中立與敵對）",
+                keywords: ["殭屍", "僵屍", "骷髏", "苦力怕", "蜘蛛", "小黑", "末影人", "村民", "羊", "牛", "豬", "雞", "狼", "蜜蜂", "烈焰使者", "流浪商人", "凋零骷髏", "掠奪者", "史萊姆"],
+                content: "● <b>友好中立：</b>羊牛豬雞可繁殖；村民可交易職業；末影人（小黑）別直視眼睛、他怕水。<br>● <b>敵對怪物：</b>殭屍陽光下自燃；骷髏遠程射箭；苦力怕接近會自爆（掉火藥、怕貓）；烈焰使者掉烈焰棒。"
+            },
+            {
+                category: "生物與敵對怪物",
+                title: "水生生物與世界 Boss",
+                keywords: ["鱈魚", "鮭魚", "河豚", "魷魚", "發光魷魚", "海龜", "海豚", "沉溺者", "守衛者", "遠古守衛者", "阿圖", "終界龍", "末影龍", "凋零怪", "boss"],
+                content: "● <b>水生生態：</b>海草可繁殖海龜；守衛者守護海底遺跡，掉落海晶石。<br>● <b>世界 BOSS：</b>終界龍（摧毀水晶後攻擊頭部，掉落龍蛋）；凋零怪（召喚怪，由靈魂沙+3個凋零頭組成，掉落下界之星做信標）。"
+            },
+            {
+                category: "工具、武器與護甲",
+                title: "裝備與戰鬥系統（含新武器重錘）",
+                keywords: ["鎬", "斧", "鍬", "鋤", "劍", "弓", "十字弓", "三叉戟", "盾牌", "重錘", "mace", "盔甲", "防具", "盾"],
+                content: "● <b>階級排序：</b>木 < 石 < 鐵 < 金 < 鑽石 < 下界合金。<br>● <b>特殊武器：</b>三叉戟可附魔激流與引雷；<b>重錘 (Mace)</b> 為全新武器，從高處跳下擊中敵人傷害無上限，且完美抵消掉落傷害。<br>● <b>防禦：</b>盾牌可抵擋前方100%物理與苦力怕爆炸傷害。"
+            },
+            {
+                category: "工具、武器與護甲",
+                title: "高階生存道具與工具",
+                keywords: ["龜殼", "鞘翅", "elytra", "不死圖騰", "剪刀", "打火石", "指南針", "時鐘", "望遠鏡", "束口袋"],
+                content: "● <b>飛行神器：</b>鞘翅裝備於胸甲欄，配合煙火火箭可無限翱翔。<br>● <b>保命符：</b>不死圖騰放在副手，受到致命傷時會消耗並使玩家復活。<br>● <b>收納：</b>束口袋可在背包內將多種雜物打包收納在同個格子（上限64個物品）。"
+            },
+            {
+                category: "功能與工作檯方塊",
+                title: "基地生產與核心設施",
+                keywords: ["工作檯", "工作台", "熔爐", "高爐", "煙燻火爐", "釀造台", "鐵砧", "砂輪", "附魔台", "切石機", "織布機", "製圖台", "鍛造台"],
+                content: "● <b>加工核心：</b>高爐專精礦石加速；煙燻爐專精食物加速；釀造台用於做藥水。<br>● <b>鐵砧/砂輪：</b>鐵砧用於修復裝備與合併附魔書；砂輪移除附魔並還經驗。<br>● <b>升級：</b>鍛造台配合『獄髓升級範本』將鑽石裝備升級為下界合金。"
+            },
+            {
+                category: "功能與工作檯方塊",
+                title: "儲存、床、光源與特殊功能",
+                keywords: ["箱子", "陷阱箱", "界伏盒", "終界箱", "裝飾罐", "蜂巢", "導流體", "信標", "烽火台", "床", "火把", "提燈", "營火"],
+                content: "● <b>儲存神器：</b>界伏盒可裝滿物資後敲下隨身攜帶；終界箱為全宇宙跨空間共通倉庫。<br>● <b>特殊功能：</b>信標（烽火台）提供永久Buff；床設置重生點（注意：在地獄或終界睡覺會引發大爆炸！）。<br>● <b>光源：</b>提供照明並阻止怪物在基地周圍生成。"
+            },
+            {
+                category: "紅石機械",
+                title: "紅石與機械元件（電力系統）",
+                keywords: ["紅石粉", "紅石火把", "拉桿", "按鈕", "壓力板", "陽光感測器", "目標方塊", "絆線鉤", "紅石中繼器", "中繼器", "紅石比較器", "比較器", "觀察者", "偵測器"],
+                content: "● <b>訊號與邏輯：</b>中繼器延長訊號至15格並阻止倒流；比較器可偵測容器內『物品裝載量』；觀察者（偵測器）偵測前方方塊狀態更新並發出短暫訊號。<br>● <b>執行：</b>活塞/黏性活塞推拉方塊（上限12個）；發射器會使用內部物品（如倒水、射箭）；投擲器單純吐出物品。"
+            },
+            {
+                category: "植物、作物與食物",
+                title: "農業作物與食物成品",
+                keywords: ["小麥", "胡蘿蔔", "馬鈴薯", "甘蔗", "南瓜", "西瓜", "金蘋果", "附魔金蘋果", "迷之燉湯", "腐肉", "毒馬鈴薯"],
+                content: "● <b>作物用途：</b>小麥繁殖牛羊做麵包；甘蔗做紙與糖；南瓜戴在頭上直視終界使者不會被攻擊。<br>● <b>神級食物：</b>金蘋果與附魔金蘋果（神之蘋果）提供傷害吸收黃心與抗火抗性，絕境保命必備。"
+            },
+            {
+                category: "釀造、藥水與附魔",
+                title: "釀造鍊金、藥水與附魔系統",
+                keywords: ["地獄疙瘩", "粗製藥水", "夜視", "治療藥水", "再生藥水", "螢石粉", "紅石粉", "火藥", "龍息", "附魔書", "修補", "絲路", "幸運"],
+                content: "● <b>藥水公式：</b>水瓶 + 地獄疙瘩 = 粗製藥水。加金色胡蘿蔔=夜視；加閃爍西瓜=治療；加鬼魂之淚=再生。<br>● <b>藥水強化：</b>加螢石粉升效果等級(II)；加紅石粉延續時間；加火藥變噴濺型；加龍息變滯留型。<br>● <b>附魔書：</b>耐久、修補、鋒利、絲路、幸運等，透過鐵砧與裝備結合。"
+            },
+            {
+                category: "生物與掉落物/雜項",
+                title: "特殊與 Boss 級掉落物/雜項",
+                keywords: ["骨粉", "線", "羽毛", "皮革", "烈焰棒", "終界珍珠", "終界之眼", "下界之星", "龍蛋", "唱片", "鍛造模板"],
+                content: "● <b>基礎材料：</b>骨粉是超級催熟劑；線做弓；皮革做書。<br>● <b>Boss級掉落：</b>烈焰棒分解烈焰粉做終界之眼；終界珍珠丟出可瞬移，合成為終界之眼用來定位並開啟終界門；下界之星建造信標。"
+            }
         ];
 
         const chatMessages = document.getElementById('chat-messages');
@@ -78,8 +184,9 @@
             document.getElementById('chat-page').classList.remove('hidden');
             document.getElementById('chat-title').innerText = title;
             document.getElementById('chat-header').style.backgroundColor = color;
+            document.getElementById('chat-icon').innerText = icon;
             chatMessages.innerHTML = '';
-            appendMsg('bot', `我是麥塊導師！你想知道關於「${title}」的什麼呢？`);
+            appendMsg('bot', `你好！我是麥塊萬能導師。已載入 **${title}** 相關的核心條目。你可以隨意輸入任何麥塊的方塊、物品或怪物名稱！`);
         }
 
         function closeChat() {
@@ -91,7 +198,7 @@
             const wrap = document.createElement('div');
             wrap.className = sender === 'user' ? 'flex justify-end msg-anim' : 'flex justify-start msg-anim';
             const div = document.createElement('div');
-            div.className = sender === 'user' ? 'bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%]' : 'bg-white border p-3 rounded-2xl rounded-tl-none max-w-[85%]';
+            div.className = sender === 'user' ? 'bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-md text-sm' : 'bg-white border p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm text-sm';
             div.innerHTML = text;
             wrap.appendChild(div);
             chatMessages.appendChild(wrap);
@@ -101,23 +208,32 @@
         function handleSend() {
             const q = userInput.value.trim().toLowerCase();
             if (!q) return;
+
             appendMsg('user', q);
             userInput.value = '';
 
             setTimeout(() => {
-                let found = false;
-                // 這裡改用 tags 陣列進行模糊匹配，只要你的話裡面提到關鍵字就中
-                for (let item of mcData) {
-                    if (item.tags.some(tag => q.includes(tag))) {
-                        appendMsg('bot', `🤖 <b>AI 解析：</b><br>${item.info}`);
-                        found = true;
-                        break;
+                let matches = [];
+
+                // 全面模糊匹配：掃描輸入文字中是否包含資料庫中的任何關鍵字
+                for (let item of mcDatabase) {
+                    let matchedKey = item.keywords.find(key => q.includes(key.toLowerCase()));
+                    if (matchedKey) {
+                        matches.push(`🎯 <b>匹配到項目：【${item.title}】</b> (${item.category})<br>${item.content}`);
                     }
                 }
 
-                if (!found) {
-                    appendMsg('bot', `🤖 <b>AI 解析：</b><br>抱歉，關於「${q}」我還沒讀到那幾頁。試試問：<b>殭屍、鑽石、紅石、藥水</b>。`);
+                // 去除重複的匹配項
+                let uniqueMatches = [...new Set(matches)];
+
+                let response = "";
+                if (uniqueMatches.length > 0) {
+                    response = `🤖 <b>AI 百科解析：</b><br><br>` + uniqueMatches.join('<hr class="my-3 border-gray-200">');
+                } else {
+                    response = `🤖 <b>AI 百科解析：</b><br>找不到與「${q}」直接相關的內容。<br><br><b>💡 試試看輸入這些黃金關鍵字：</b><br>殭屍、鑽石、下界合金、重錘、觀察者、界伏盒、藥水、不死圖騰。`;
                 }
+
+                appendMsg('bot', response);
             }, 300);
         }
 
